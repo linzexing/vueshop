@@ -32,25 +32,42 @@ export default {
   },
   methods: {
     //登录请求
-    handleLogin() {
-      this.$http.post("login", this.formdata).then((res) => {
-        const {
-          data,
-          meta: { msg, status },
-        } = res.data;
-        //登录成功
-        if (status === 200) {
-          //跳转到home页面
-          this.$router.push({ name: "home" });
-          //提示成功信息
-          this.$message.success(msg);
-        }
-        //登录不成功
-        else {
-          //提示成功信息
-          this.$message.warning(msg);
-        }
-      });
+    async handleLogin() {
+      const res = await this.$http.post("login", this.formdata);
+      const {
+        data,
+        meta: { msg, status },
+      } = res.data;
+
+      if (status === 200) {
+        //跳转到home页面
+        this.$router.push({ name: "home" });
+        //提示成功信息
+        this.$message.success(msg);
+      }
+      //登录不成功
+      else {
+        //提示成功信息
+        this.$message.warning(msg);
+      }
+      //   this.$http.post("login", this.formdata).then((res) => {
+      //     const {
+      //       data,
+      //       meta: { msg, status },
+      //     } = res.data;
+      //     //登录成功
+      //     if (status === 200) {
+      //       //跳转到home页面
+      //       this.$router.push({ name: "home" });
+      //       //提示成功信息
+      //       this.$message.success(msg);
+      //     }
+      //     //登录不成功
+      //     else {
+      //       //提示成功信息
+      //       this.$message.warning(msg);
+      //     }
+      //   });
     },
   },
 };
