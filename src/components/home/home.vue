@@ -20,6 +20,7 @@
       <!-- 侧边栏 -->
       <el-aside class="aside" width="200px">
         <!-- 侧边栏导航 -->
+        <!-- 开启路由模式 -->
         <el-menu 
         :router="true"
         :unique-opened="true">
