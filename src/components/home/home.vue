@@ -8,7 +8,9 @@
         </el-col>
         <el-col :span="2">
           <div class="grid-content bg-purple">
-            <a class="loginout" @click.prevent="handleSignout()" href="#">退出</a>
+            <a class="loginout" @click.prevent="handleSignout()" href="#"
+              >退出</a
+            >
           </div>
         </el-col>
       </el-row>
@@ -18,15 +20,16 @@
       <!-- 侧边栏 -->
       <el-aside class="aside" width="200px">
         <!-- 侧边栏导航 -->
-        <el-menu
-        :unique-opened='true'>
+        <el-menu 
+        :router="true"
+        :unique-opened="true">
           <!-- 1 -->
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-location"></i>
               <span>用户管理</span>
             </template>
-            <el-menu-item index="1-1">
+            <el-menu-item index="users">
               <i class="el-icon-location"></i>
               <span>用户列表</span>
             </el-menu-item>
@@ -90,36 +93,37 @@
         </el-menu>
       </el-aside>
       <!-- 主容器 -->
-      <el-main class="main">
-
+      <el-main class="main"> 
+        <router-view></router-view>
       </el-main>
     </el-container>
   </el-container>
 </template>
 <script>
 export default {
-    //newVue之前自动触发
-    beforeCreate() {
+  //newVue之前自动触发
+  beforeCreate() {
     //获取token
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
 
     if (!token) {
-        //token没有 -> 登录页面
-        this.$router.push({name:'login'})
+      //token没有 -> 登录页面
+      this.$router.push({ name: "login" });
     }
     //if token 有-> 继续渲染组件
+  },
+  methods: {
+    //退出
+    handleSignout() {
+      //1.清除token
+      localStorage.clear();
+      //2.提示
+      this.$message.success("退出成功");
+      //3.跳转到login组件
+      this.$router.push({ name: "login" });
     },
-    methods:{
-        handleSignout() {
-        //1.清除token
-        localStorage.clear()
-        //2.提示
-        this.$message.success('退出成功')
-        //3.跳转到login组件
-        this.$router.push({name:'login'})
-        }
-    }
-}
+  },
+};
 </script>
 <style>
 .container {

@@ -11,7 +11,7 @@
         <el-input v-model="formdata.username"></el-input>
       </el-form-item>
       <el-form-item label="密码">
-        <el-input v-model="formdata.password"></el-input>
+        <el-input v-model="formdata.password" type="password"></el-input>
       </el-form-item>
       <el-button @click.prevent="handleLogin()" class="login-btn" type="primary"
         >登录</el-button
@@ -31,8 +31,8 @@ export default {
     };
   },
   methods: {
-    /*让异步代码ajax看起来像同步代码
-    1、找到异步操作有结果的代码，见面夹await，同时接收异步操作的结果res
+    /* 让异步代码ajax看起来像同步代码
+    1、找到异步操作有结果的代码，见面加await，同时接收异步操作的结果res
     2、找到距离异步操作有结果的代码最近的方法，前面加async
     */
     //登录请求
